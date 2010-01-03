@@ -1,4 +1,4 @@
- /* Arduino PHP Agent Arduino Sketch. For communicating with the agent.php script
+/* Arduino PHP Agent Arduino Sketch. For communicating with the agent.php script
     Copyright (C) 2011  Juan Toledo Carrasco juantoledo@gmail.com
 
     This program is free software: you can redistribute it and/or modify
@@ -20,36 +20,27 @@
 #include <Udp.h>
 #include <WString.h>
 #include <SPI.h> 
+#include <Client.h>
+#include <Ethernet.h>
+#include <Server.h>
+#include <Udp.h>
+#include <WString.h>
+#include <SPI.h> 
  
 
 //Ethernet Shield Settings, please adapt to your specific needs
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; //physical mac address
-byte ip[] = { 192, 168, 1, 150 }; // ip in lan
-byte gateway[] = { 192, 168, 1, 1 }; // internet access via router
+byte ip[] = { 192, 168, 3, 201 }; // ip in lan
+byte gateway[] = { 192, 168, 3, 1 }; // internet access via router
 byte subnet[] = { 255, 255, 255, 0 }; //subnet mask
-Server server(84); //server port
+EthernetServer  server(84); //server port
 
 
 //init. of the agent, this one will receive info from the Arduino; mostly agent.php
-byte agentip[] = { 192, 168, 1, 13 }; //ip on the agent.php was deployed
+byte agentip[] = { 192, 168, 3, 200 }; //ip on the agent.php was deployed
 int agentport = 80; //tcp port for it
-Client agent(agentip, agentport); 
-             
-             
+//Client agent(agentip, agentport); 
 
-void setup() {
- 
-  //The Arduino Server on Ethernet Shield start server
-  Ethernet.begin(mac, ip, gateway, subnet);
-  server.begin();
-  
-  
-  //Serial Settings
-  delay(2000);
-  Serial.begin(9600);
-  delay(2000);
-  
-}
 
 String readString = String(100); //string for fetching data from address and control variables
 int isExecuting = 0;
@@ -61,10 +52,25 @@ int v; //numeric pin value
 String output; 
   
 
-void loop() {
+void setup() {
   
+  // start the Ethernet connection and the server:
+  Ethernet.begin(mac, ip);
+  server.begin();
+  Serial.print("server is at ");
+  Serial.println(Ethernet.localIP());
+    
+    //Serial Settings
+    delay(2000);
+    Serial.begin(9600);
+    delay(2000);
+}
+
+
+
+void loop() {
   // Create a client connection
-   Client client = server.available();
+   EthernetClient client = server.available();
     
   //If a HTTP Request was made to this server
   if(client){
@@ -204,7 +210,6 @@ void loop() {
         *
         */  
   }
-  
 }
 
 
