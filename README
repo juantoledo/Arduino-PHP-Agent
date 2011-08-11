@@ -1,0 +1,32 @@
+Arduino PHP Agent. For communicating with the agent.php script
+    Copyright (C) 2011  Juan Toledo Carrasco juantoledo@gmail.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+This is the readme file for the Arduino PHP Agent
+
+
+To use with your Arduino and Ethernet Shield, simply follow the next steps:
+
+
+ 1) Configure the MAC, ip, mask and gw variables with a valid settings to assign to the Arduino in the sketch.pde file
+
+ 2) Set the IP address to the Apache WEB server on which the agent.php will be deployed, in the sketch.pde file
+
+ 3) Copy agent.php and config.php to that Apache www directory or Vhost
+
+ 4) Go to http://ip:port/agent.php and enjoy
+
+
+
