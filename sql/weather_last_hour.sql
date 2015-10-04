@@ -11,8 +11,8 @@ case when round(avg(wind_speed)) < 5 then 0 else round(max(wind_speed)) end as g
 from 
 weather_data 
 
-
 where datetime > now() - interval '1 hour'
+and wind_direction between 0 and 360
 group by wind_direction
 order by count(wind_direction) desc limit 1;
 
@@ -30,8 +30,7 @@ case when round(avg(wind_speed)) < 5 then 0 else round(max(wind_speed)) end as g
 
 from 
 weather_data 
-
-
 where datetime > now() - interval '10 minutes'
+and wind_direction between 0 and 360
 group by wind_direction
 order by count(wind_direction) desc limit 1;
